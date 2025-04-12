@@ -9,9 +9,6 @@ dependencies = [
     "dagster-cloud",
     "dagster-dbt",
     "dbt-duckdb<1.10",
-    "duckdb>=1.2.2",
-    "pandas>=2.2.3",
-    "pyarrow>=19.0.1",
 ]
 
 [project.optional-dependencies]

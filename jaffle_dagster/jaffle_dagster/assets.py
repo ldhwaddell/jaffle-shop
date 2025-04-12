@@ -2,7 +2,7 @@ import os
 
 import duckdb
 import pandas as pd
-from dagster import AssetExecutionContext
+from dagster import AssetExecutionContext, asset
 from dagster_dbt import DbtCliResource, dbt_assets
 
 from .project import jaffle_shop_project
@@ -10,6 +10,7 @@ from .project import jaffle_shop_project
 duckdb_db_path = jaffle_shop_project.project_dir.joinpath("tutorial.duckdb")
 
 
+@asset(compute_kind="python")
 def raw_customers(context: AssetExecutionContext) -> None:
     data = pd.read_csv("https://docs.dagster.io/assets/customers.csv")
     conn = duckdb.connect(os.fspath(duckdb_db_path))
@@ -24,4 +25,3 @@ def raw_customers(context: AssetExecutionContext) -> None:
 @dbt_assets(manifest=jaffle_shop_project.manifest_path)
 def jaffle_shop_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
-
