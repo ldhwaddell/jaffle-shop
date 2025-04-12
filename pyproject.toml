@@ -10,5 +10,6 @@ dependencies = [
     "dbt-duckdb>=1.9.2",
     "duckdb>=1.2.2",
     "pandas>=2.2.3",
+    "plotly>=6.0.1",
     "pyarrow>=19.0.1",
 ]

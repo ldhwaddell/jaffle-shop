@@ -2,8 +2,9 @@ import os
 
 import duckdb
 import pandas as pd
-from dagster import AssetExecutionContext, asset
-from dagster_dbt import DbtCliResource, dbt_assets
+import plotly.express as px
+from dagster import MetadataValue, AssetExecutionContext, asset
+from dagster_dbt import DbtCliResource, dbt_assets, get_asset_key_for_model
 
 from .project import jaffle_shop_project
 
@@ -25,3 +26,21 @@ def raw_customers(context: AssetExecutionContext) -> None:
 @dbt_assets(manifest=jaffle_shop_project.manifest_path)
 def jaffle_shop_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
+
+
+@asset(
+    compute_kind="python",
+    deps=[get_asset_key_for_model([jaffle_shop_dbt_assets], "customers")],
+)
+def order_count_chart(context: AssetExecutionContext):
+    conn = duckdb.connect(os.fspath(duckdb_db_path))
+    customers = conn.sql("select * from customers").df()
+
+    fig = px.histogram(customers, x="number_of_orders")
+    fig.update_layout(bargap=0.2)
+    save_chart_path = duckdb_db_path.parent.joinpath("order_count_chart.html")
+    fig.write_html(save_chart_path, auto_open=True)
+
+    context.add_output_metadata(
+        {"plot_url": MetadataValue.url(f"file://{os.fspath(save_chart_path)}")}
+    )

@@ -652,6 +652,7 @@ dependencies = [
     { name = "dbt-duckdb" },
     { name = "duckdb" },
     { name = "pandas" },
+    { name = "plotly" },
     { name = "pyarrow" },
 ]
 
@@ -662,6 +663,7 @@ requires-dist = [
     { name = "dbt-duckdb", specifier = ">=1.9.2" },
     { name = "duckdb", specifier = ">=1.2.2" },
     { name = "pandas", specifier = ">=2.2.3" },
+    { name = "plotly", specifier = ">=6.0.1" },
     { name = "pyarrow", specifier = ">=19.0.1" },
 ]
 
@@ -863,6 +865,15 @@ wheels = [
 ]
 
 [[package]]
+name = "narwhals"
+version = "1.34.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f5/6d/0ad9e8fe41dba509f1c3241a46e52c9677eb9f67f7eb3c8018b1ae088469/narwhals-1.34.1.tar.gz", hash = "sha256:8941a08cf62f39ae67be945090b20a19c51fb9048ac909cad2f95aee23f9e302", size = 265602 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b0/a2/2ea3f2058ae661b06fad1a14c0f29f1cc8e49478d02a2d68f0eac3872b86/narwhals-1.34.1-py3-none-any.whl", hash = "sha256:aee49a30d1624371ad975ede2bab16cd125ab5df0fd185e2f4757e103b074d27", size = 325548 },
+]
+
+[[package]]
 name = "networkx"
 version = "3.4.2"
 source = { registry = "https://pypi.org/simple" }
@@ -982,6 +993,19 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/ca/bc/f35b8446f4531a7cb215605d100cd88b7ac6f44ab3fc94870c120ab3adbf/pathspec-0.12.1.tar.gz", hash = "sha256:a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712", size = 51043 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cc/20/ff623b09d963f88bfde16306a54e12ee5ea43e9b597108672ff3a408aad6/pathspec-0.12.1-py3-none-any.whl", hash = "sha256:a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08", size = 31191 },
+]
+
+[[package]]
+name = "plotly"
+version = "6.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "narwhals" },
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c7/cc/e41b5f697ae403f0b50e47b7af2e36642a193085f553bf7cc1169362873a/plotly-6.0.1.tar.gz", hash = "sha256:dd8400229872b6e3c964b099be699f8d00c489a974f2cfccfad5e8240873366b", size = 8094643 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/02/65/ad2bc85f7377f5cfba5d4466d5474423a3fb7f6a97fd807c06f92dd3e721/plotly-6.0.1-py3-none-any.whl", hash = "sha256:4714db20fea57a435692c548a4eb4fae454f7daddf15f8d8ba7e1045681d7768", size = 14805757 },
 ]
 
 [[package]]
